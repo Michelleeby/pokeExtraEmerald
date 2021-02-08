@@ -1,9 +1,7 @@
 EventScript_UseSurf:: @ 8271EA0
-	checkpartymove MOVE_SURF
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_EndUseSurf
-	bufferpartymonnick 0, VAR_RESULT
-	setfieldeffectargument 0, VAR_RESULT
+	goto_if_unset FLAG_BADGE05_GET, EventScript_EndUseSurf
+	bufferpartymonnick 0, 0
+	setfieldeffectargument 0, 0
 	lockall
 	msgbox gText_WantToUseSurf, MSGBOX_YESNO
 	compare VAR_RESULT, NO

@@ -6,7 +6,6 @@
 LittlerootTown_MapScripts:: @ 81E7DCB
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LittlerootTown_OnFrame
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_OnWarp
 	.byte 0
 
 	@ State descriptions for VAR_LITTLEROOT_TOWN_STATE
@@ -55,19 +54,7 @@ LittlerootTown_OnTransition: @ 81E7DDB
 	call_if_eq LittlerootTown_EventScript_MoveRivalFromOldale
 	compare VAR_LITTLEROOT_RIVAL_STATE, 3
 	call_if_eq LittlerootTown_EventScript_SetRivalLeftForRoute103
-	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1
-	call_if_eq LittlerootTown_EventScript_HideMapNamePopup
-	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
-	call_if_eq LittlerootTown_EventScript_LeftLabAfterDexUpgrade
 	end
-
-LittlerootTown_EventScript_LeftLabAfterDexUpgrade:: @ 81E7E45
-	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3
-	return
-
-LittlerootTown_EventScript_HideMapNamePopup:: @ 81E7E4B
-	setflag FLAG_HIDE_MAP_NAME_POPUP
-	return
 
 LittlerootTown_EventScript_SetRivalLeftForRoute103:: @ 81E7E4F
 	setflag FLAG_RIVAL_LEFT_FOR_ROUTE103
@@ -120,7 +107,6 @@ LittlerootTown_EventScript_SetMomInFrontOfDoorFemale:: @ 81E7EB9
 LittlerootTown_OnFrame: @ 81E7EC1
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 1, LittlerootTown_EventScript_StepOffTruckMale
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 2, LittlerootTown_EventScript_StepOffTruckFemale
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_BeginDexUpgradeScene
 	.2byte 0
 
 LittlerootTown_EventScript_StepOffTruckMale:: @ 81E7EDB
@@ -217,46 +203,6 @@ LittlerootTown_Movement_PlayerStepOffTruck: @ 81E7FAC
 	delay_16
 	delay_16
 	step_end
-
-LittlerootTown_EventScript_BeginDexUpgradeScene:: @ 81E7FB1
-	lockall
-	playse SE_PIN
-	applymovement LOCALID_BIRCH, Common_Movement_ExclamationMark
-	waitmovement 0
-	delay 80
-	msgbox LittlerootTown_Text_BirchSomethingToShowYouAtLab, MSGBOX_DEFAULT
-	closemessage
-	clearflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
-	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
-	delay 20
-	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	warp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 255, 6, 5
-	waitstate
-	releaseall
-	end
-
-LittlerootTown_OnWarp: @ 81E7FE2
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_SetRivalBirchPosForDexUpgrade
-	.2byte 0
-
-LittlerootTown_EventScript_SetRivalBirchPosForDexUpgrade:: @ 81E7FEC
-	addobject LOCALID_BIRCH
-	addobject LOCALID_RIVAL
-	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeMale
-	goto LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeFemale
-	end
-
-LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeMale:: @ 81E8004
-	setobjectxy LOCALID_RIVAL, 6, 10
-	setobjectxy LOCALID_BIRCH, 5, 10
-	end
-
-LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeFemale:: @ 81E8013
-	setobjectxy LOCALID_RIVAL, 13, 10
-	setobjectxy LOCALID_BIRCH, 14, 10
-	end
 
 LittlerootTown_EventScript_FatMan:: @ 81E8022
 	msgbox LittlerootTown_Text_CanUsePCToStoreItems, MSGBOX_NPC

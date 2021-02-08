@@ -4,6 +4,7 @@
 #include "metatile_behavior.h"
 #include "fieldmap.h"
 #include "random.h"
+#include "rtc.h"
 #include "field_player_avatar.h"
 #include "event_data.h"
 #include "safari_zone.h"
@@ -267,7 +268,7 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
 u16 GetCurrentMapWildMonHeaderId(void)
 {
     u16 i;
-
+    
     for (i = 0; ; i++)
     {
         const struct WildPokemonHeader *wildHeader = &gWildMonHeaders[i];
@@ -285,6 +286,14 @@ u16 GetCurrentMapWildMonHeaderId(void)
                     alteringCaveId = 0;
 
                 i += alteringCaveId;
+            }
+            // Check time. If night, check that a night map exists, if it does,
+            // increment the map ID, i, by 1. This assumes the night mons are 
+            // in the second group.
+            if ((gLocalTime.hours >= NIGHT_START || gLocalTime.hours < DAY_START) && (gWildMonHeaders[i + 1].mapGroup == gSaveBlock1Ptr->location.mapGroup &&
+            gWildMonHeaders[i + 1].mapNum == gSaveBlock1Ptr->location.mapNum))
+            {
+                i += 1;
             }
 
             return i;
@@ -1002,4 +1011,3 @@ u8 ChooseHiddenMonIndex(void)
         return 0xFF;
     #endif
 }
-

@@ -1011,4 +1011,3 @@ u8 ChooseHiddenMonIndex(void)
         return 0xFF;
     #endif
 }
-

@@ -88,7 +88,7 @@
 #define MIN_STAT_STAGE     0
 #define DEFAULT_STAT_STAGE 6
 #define MAX_STAT_STAGE    12
-
+                                          // HP ATK DEF SPEED SPA SPD
 #define BEST_IV_SPREAD_HIDDEN_POWER_BUG      {31, 31, 31, 30, 31, 30}
 #define BEST_IV_SPREAD_HIDDEN_POWER_DARK     {31, 31, 31, 31, 31, 31}
 #define BEST_IV_SPREAD_HIDDEN_POWER_DRAGON   {30, 31, 31, 31, 31, 31}
@@ -112,10 +112,81 @@
 
 #define BEST_IV_SPREAD BEST_IV_SPREAD_HIDDEN_POWER_DARK
 
-#define MAX_EV_SPREAD                     {252, 252, 252, 252, 252, 252}
-#define MAX_EV_SPREAD_SPECIAL             {252,   0, 252, 252, 252, 252}
-#define MAX_EV_SPREAD_TRICK_ROOM          {252, 252, 252,   0, 252, 252}
-#define MAX_EV_SPREAD_SPECIAL_TRICK_ROOM  {252,   0, 252,   0, 252, 252}
+// HP ATK
+#define EV_SPREAD_HP_ATK_DEF        {252, 252, 6, 0, 0, 0}
+#define EV_SPREAD_HP_ATK_SPEED      {252, 252, 0, 6, 0, 0}
+#define EV_SPREAD_HP_ATK_SPATK      {252, 252, 0, 0, 6, 0}
+#define EV_SPREAD_HP_ATK_SPDEF      {252, 252, 0, 0, 0, 6}
+// HP DEF   
+#define EV_SPREAD_HP_DEF_ATK        {252, 6, 252, 0, 0, 0}
+#define EV_SPREAD_HP_DEF_SPEED      {252, 0, 252, 6, 0, 0}
+#define EV_SPREAD_HP_DEF_SPATK      {252, 0, 252, 0, 6, 0}
+#define EV_SPREAD_HP_DEF_SPDEF      {252, 0, 252, 0, 0, 6}
+// HP SPEED   
+#define EV_SPREAD_HP_SPEED_ATK      {252, 6, 0, 252, 0, 0}
+#define EV_SPREAD_HP_SPEED_DEF      {252, 0, 6, 252, 0, 0}
+#define EV_SPREAD_HP_SPEED_SPATK    {252, 0, 0, 252, 6, 0}
+#define EV_SPREAD_HP_SPEED_SPDEF    {252, 0, 0, 252, 0, 6}
+// HP SPATKTK
+#define EV_SPREAD_HP_SPATK_ATK      {252, 6, 0, 0, 252, 0}
+#define EV_SPREAD_HP_SPATK_DEF      {252, 0, 6, 0, 252, 0}
+#define EV_SPREAD_HP_SPATK_SPEED    {252, 0, 0, 6, 252, 0}
+#define EV_SPREAD_HP_SPATK_SPDEF    {252, 0, 0, 0, 252, 6}
+// HP SPDEFEF 
+#define EV_SPREAD_HP_SPDEF_ATK      {252, 6, 0, 0, 0, 252}
+#define EV_SPREAD_HP_SPDEF_DEF      {252, 0, 6, 0, 0, 252}
+#define EV_SPREAD_HP_SPDEF_SPEED    {252, 0, 0, 6, 0, 252}
+#define EV_SPREAD_HP_SPDEF_SPATK    {252, 0, 0, 0, 6, 252}
+// ATK DEF 
+#define EV_SPREAD_ATK_DEF_HP        {6, 252, 252, 0, 0, 0}
+#define EV_SPREAD_ATK_DEF_SPEED     {0, 252, 252, 6, 0, 0}
+#define EV_SPREAD_ATK_DEF_SPATK     {0, 252, 252, 0, 6, 0}
+#define EV_SPREAD_ATK_DEF_SPDEF     {0, 252, 252, 0, 0, 6}
+// ATK SPEED 
+#define EV_SPREAD_ATK_SPEED_HP      {6, 252, 0, 252, 0, 0}
+#define EV_SPREAD_ATK_SPEED_DEF     {0, 252, 6, 252, 0, 0}
+#define EV_SPREAD_ATK_SPEED_SPATK   {0, 252, 0, 252, 6, 0}
+#define EV_SPREAD_ATK_SPEED_SPDEF   {0, 252, 0, 252, 0, 6}
+// ATK SPATKTK 
+#define EV_SPREAD_ATK_SPATK_HP      {6, 252, 0, 0, 252, 0}
+#define EV_SPREAD_ATK_SPATK_DEF     {0, 252, 6, 0, 252, 0}
+#define EV_SPREAD_ATK_SPATK_SPEED   {0, 252, 0, 6, 252, 0}
+#define EV_SPREAD_ATK_SPATK_SPDEF   {0, 252, 0, 0, 252, 6}
+// ATK SPDEFEF 
+#define EV_SPREAD_ATK_SPDEF_HP      {6, 252, 0, 0, 0, 252}
+#define EV_SPREAD_ATK_SPDEF_DEF     {0, 252, 6, 0, 0, 252}
+#define EV_SPREAD_ATK_SPDEF_SPEED   {0, 252, 0, 6, 0, 252}
+#define EV_SPREAD_ATK_SPDEF_SPATK   {0, 252, 0, 0, 6, 252}
+// DEF SPEED 
+#define EV_SPREAD_DEF_SPEED_HP      {6, 0, 252, 252, 0, 0}
+#define EV_SPREAD_DEF_SPEED_ATK     {0, 6, 252, 252, 0, 0}
+#define EV_SPREAD_DEF_SPEED_SPATK   {0, 0, 252, 252, 6, 0}
+#define EV_SPREAD_DEF_SPEED_SPDEF   {0, 0, 252, 252, 0, 6}
+// DEF SPATKTK 
+#define EV_SPREAD_DEF_SPATK_HP      {6, 0, 252, 0, 252, 0}
+#define EV_SPREAD_DEF_SPATK_ATK     {0, 6, 252, 0, 252, 0}
+#define EV_SPREAD_DEF_SPATK_SPEED   {0, 0, 252, 6, 252, 0}
+#define EV_SPREAD_DEF_SPATK_SPDEF   {0, 0, 252, 0, 252, 6}
+// DEF SPDEFEF 
+#define EV_SPREAD_DEF_SPDEF_HP      {6, 0, 252, 0, 0, 252}
+#define EV_SPREAD_DEF_SPDEF_ATK     {0, 6, 252, 0, 0, 252}
+#define EV_SPREAD_DEF_SPDEF_SPEED   {0, 0, 252, 6, 0, 252}
+#define EV_SPREAD_DEF_SPDEF_SPATK   {0, 0, 252, 0, 6, 252}
+// SPEED SPATKTK
+#define EV_SPREAD_SPEED_SPATK_HP    {6, 0, 0, 252, 252, 0}
+#define EV_SPREAD_SPEED_SPATK_ATK   {0, 6, 0, 252, 252, 0}
+#define EV_SPREAD_SPEED_SPATK_DEF   {0, 0, 6, 252, 252, 0}
+#define EV_SPREAD_SPEED_SPATK_SPDEF {0, 0, 0, 252, 252, 6}
+// SPEED SPDEFEF
+#define EV_SPREAD_SPEED_SPDEF_HP    {6, 0, 0, 252, 0, 252}
+#define EV_SPREAD_SPEED_SPDEF_ATK   {0, 6, 0, 252, 0, 252}
+#define EV_SPREAD_SPEED_SPDEF_DEF   {0, 0, 6, 252, 0, 252}
+#define EV_SPREAD_SPEED_SPDEF_SPATK {0, 0, 0, 252, 6, 252}
+// SPATKTK SPDEFEF
+#define EV_SPREAD_SPATK_SPDEF_HP    {6, 0, 0, 0, 252, 252}
+#define EV_SPREAD_SPATK_SPDEF_ATK   {0, 6, 0, 0, 252, 252}
+#define EV_SPREAD_SPATK_SPDEF_DEF   {0, 0, 6, 0, 252, 252}
+#define EV_SPREAD_SPATK_SPDEF_SPEED {0, 0, 0, 6, 252, 252}
 
 #define FRIENDSHIP_FRUSTRATION   1
 #define FRIENDSHIP_RETURN      255

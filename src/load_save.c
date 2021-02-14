@@ -240,8 +240,6 @@ void LoadPlayerBag(void)
     for (i = 0; i < MAIL_COUNT; i++)
         gLoadedSaveData.mail[i] = gSaveBlock1Ptr->mail[i];
 
-    gLastEncryptionKey = gSaveBlock2Ptr->encryptionKey;
-
     // load player medicine.
     for (i = 0; i < BAG_MEDICINE_COUNT; i++)
         gLoadedSaveData.medicine[i] = gSaveBlock1Ptr->bagPocket_Medicine[i];
@@ -254,6 +252,7 @@ void LoadPlayerBag(void)
     for (i = 0; i < BAG_POWERUP_COUNT; i++)
         gLoadedSaveData.powerUp[i] = gSaveBlock1Ptr->bagPocket_PowerUp[i];
 
+    gLastEncryptionKey = gSaveBlock2Ptr->encryptionKey;
 }
 
 void SavePlayerBag(void)

@@ -1,6 +1,7 @@
 static const struct TrainerMon sParty_Sawyer1[] = {
     {
     .iv = 0,
+    .evs = EV_SPREAD_ATK_SPEED_HP,
     .lvl = 21,
     .species = SPECIES_GEODUDE,
     }
@@ -3365,26 +3366,38 @@ static const struct TrainerMon sParty_Drake[] = {
 };
 
 static const struct TrainerMon sParty_Roxanne1[] = {
-    {
-    .iv = 100,
-    .lvl = 12,
-    .species = SPECIES_GEODUDE,
-    .heldItem = ITEM_NONE,
-    .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_ROCK_THROW, MOVE_ROCK_TOMB}
+    // LEADER @ RUSBORO GYM
+
+    {// ALOLAN GEODUDE
+    .ivs = BEST_IV_SPREAD,
+    .evs = EV_SPREAD_ATK_DEF_HP,
+    .gender = MON_FEMALE,
+    .nature = NATURE_IMPISH,
+    .heldItem = ITEM_SITRUS_BERRY,
+    .lvl = 16,
+    .species = SPECIES_GEODUDE_ALOLAN,
+    .moves = {MOVE_PROTECT, MOVE_BODY_SLAM, MOVE_SUCKER_PUNCH, MOVE_EXPLOSION},
+    .ability = ABILITY_HIDDEN
     },
-    {
-    .iv = 100,
-    .lvl = 12,
-    .species = SPECIES_GEODUDE,
-    .heldItem = ITEM_NONE,
-    .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_ROCK_THROW, MOVE_ROCK_TOMB}
-    },
-    {
-    .iv = 200,
+    {// ARCHEN
+    .ivs = BEST_IV_SPREAD,
+    .evs = EV_SPREAD_ATK_SPEED_HP,
+    .gender = MON_MALE,
+    .nature = NATURE_JOLLY,
+    .heldItem = ITEM_FOCUS_SASH,
     .lvl = 15,
-    .species = SPECIES_NOSEPASS,
-    .heldItem = ITEM_ORAN_BERRY,
-    .moves = {MOVE_BLOCK, MOVE_HARDEN, MOVE_TACKLE, MOVE_ROCK_TOMB}
+    .species = SPECIES_ARCHEN,
+    .moves = {MOVE_ROOST, MOVE_QUICK_ATTACK, MOVE_ENDEAVOR, MOVE_WING_ATTACK}
+    },
+    {// TYRUNT
+    .ivs = BEST_IV_SPREAD,
+    .evs = EV_SPREAD_ATK_DEF_HP,
+    .gender = MON_FEMALE,
+    .nature = NATURE_ADAMANT,
+    .heldItem = ITEM_LIECHI_BERRY,
+    .lvl = 15,
+    .species = SPECIES_TYRUNT,
+    .moves = {MOVE_POISON_FANG, MOVE_THUNDER_FANG, MOVE_FIRE_FANG, MOVE_ROCK_POLISH}
     }
 };
 
@@ -4225,24 +4238,76 @@ static const struct TrainerMon sParty_Billy[] = {
 };
 
 static const struct TrainerMon sParty_Josh[] = {
-    {
-    .iv = 100,
-    .lvl = 10,
-    .species = SPECIES_GEODUDE,
-    .moves = {MOVE_TACKLE, MOVE_NONE, MOVE_NONE, MOVE_NONE}
+    // Trainer 1 @ RUSTBORO GYM
+
+    {// BINACLE
+    .ivs = BEST_IV_SPREAD,
+    .evs = EV_SPREAD_ATK_DEF_SPEED,
+    .gender = MON_MALE,
+    .nature = NATURE_ADAMANT,
+    .heldItem = ITEM_RINDO_BERRY,
+    .lvl = 15,
+    .species = SPECIES_BINACLE,
+    .moves = {MOVE_LIQUIDATION, MOVE_ROCK_TOMB, MOVE_POISON_JAB, MOVE_EARTHQUAKE},
+    .ability = ABILITY_SLOT_1
+    },
+    {// LILEEP
+    .ivs = BEST_IV_SPREAD,
+    .evs = EV_SPREAD_DEF_SPDEF_SPATK,
+    .gender = MON_FEMALE,
+    .nature = NATURE_CALM,
+    .heldItem = ITEM_SITRUS_BERRY,
+    .lvl = 15,
+    .species = SPECIES_LILEEP,
+    .moves = {MOVE_GIGA_DRAIN, MOVE_RECOVER, MOVE_MIRROR_COAT, MOVE_BRINE},
+    .ability = ABILITY_HIDDEN
+    },
+    {// ROCKRUFF
+    .ivs = BEST_IV_SPREAD,
+    .evs = EV_SPREAD_ATK_SPEED_HP,
+    .gender = MON_MALE,
+    .nature = NATURE_ADAMANT,
+    .heldItem = ITEM_SALAC_BERRY,
+    .lvl = 16,
+    .species = SPECIES_ROCKRUFF_OWN_TEMPO,
+    .moves = {MOVE_ROCK_TOMB, MOVE_SUCKER_PUNCH, MOVE_ZEN_HEADBUTT, MOVE_THRASH}
     }
 };
 
 static const struct TrainerMon sParty_Tommy[] = {
-    {
-    .iv = 110,
-    .lvl = 8,
-    .species = SPECIES_GEODUDE,
+    // Trainer 2 @ RUSTBORO GYM
+
+    {// SHUCKLE
+    .ivs = BEST_IV_SPREAD,
+    .evs = EV_SPREAD_DEF_SPDEF_HP,
+    .gender = MON_FEMALE,
+    .nature = NATURE_CAREFUL,
+    .heldItem = ITEM_BINDING_BAND,
+    .lvl = 14,
+    .species = SPECIES_SHUCKLE,
+    .moves = {MOVE_INFESTATION, MOVE_TOXIC, MOVE_ROCK_TOMB, MOVE_STRUGGLE_BUG},
+    .ability = ABILITY_HIDDEN
     },
-    {
-    .iv = 120,
-    .lvl = 8,
-    .species = SPECIES_GEODUDE,
+    {// CRANIDOS
+    .ivs = BEST_IV_SPREAD,
+    .evs = EV_SPREAD_HP_ATK_SPEED,
+    .gender = MON_MALE,
+    .nature = NATURE_ADAMANT,
+    .heldItem = ITEM_CHOICE_BAND,
+    .lvl = 14,
+    .species = SPECIES_CRANIDOS,
+    .moves = {MOVE_ROCK_SLIDE, MOVE_HEADBUTT, MOVE_ZEN_HEADBUTT, MOVE_IRON_TAIL},
+    .ability = ABILITY_HIDDEN
+    },
+    {// ANORITH
+    .ivs = BEST_IV_SPREAD,
+    .evs = EV_SPREAD_ATK_SPEED_HP,
+    .gender = MON_MALE,
+    .nature = NATURE_ADAMANT,
+    .heldItem = ITEM_LIECHI_BERRY,
+    .lvl = 14,
+    .species = SPECIES_ANORITH,
+    .moves = {MOVE_AQUA_JET, MOVE_BRICK_BREAK, MOVE_METAL_CLAW, MOVE_DIG}
     }
 };
 
@@ -7647,15 +7712,38 @@ static const struct TrainerMon sParty_GruntJaggedPass[] = {
 };
 
 static const struct TrainerMon sParty_Marc[] = {
-    {
-    .iv = 120,
-    .lvl = 8,
-    .species = SPECIES_GEODUDE,
+    // Trainer 3 @ RUSTBORO GYM
+
+    {// KABUTO
+    .ivs = BEST_IV_SPREAD,
+    .evs = EV_SPREAD_ATK_DEF_SPEED,
+    .gender = MON_MALE,
+    .nature = NATURE_IMPISH,
+    .heldItem = ITEM_BIG_ROOT,
+    .lvl = 15,
+    .species = SPECIES_KABUTO,
+    .moves = {MOVE_AQUA_JET, MOVE_LEECH_LIFE, MOVE_ROCK_TOMB, MOVE_WATERFALL},
+    .ability = ABILITY_HIDDEN,
     },
-    {
-    .iv = 130,
-    .lvl = 8,
-    .species = SPECIES_GEODUDE,
+    {// NOSEPASS
+    .ivs = BEST_IV_SPREAD,
+    .evs = EV_SPREAD_DEF_SPDEF_HP,
+    .gender = MON_FEMALE,
+    .nature = NATURE_BOLD,
+    .heldItem = ITEM_CHESTO_BERRY,
+    .lvl = 14,
+    .species = SPECIES_NOSEPASS,
+    .moves = {MOVE_IRON_DEFENSE, MOVE_PROTECT, MOVE_ROCK_TOMB, MOVE_REST}
+    },
+    {// ARON
+    .ivs = BEST_IV_SPREAD,
+    .evs = EV_SPREAD_ATK_DEF_HP,
+    .gender = MON_FEMALE,
+    .nature = NATURE_IMPISH,
+    .heldItem = ITEM_SITRUS_BERRY,
+    .lvl = 14,
+    .species = SPECIES_ARON,
+    .moves = {MOVE_IRON_HEAD, MOVE_ROCK_TOMB, MOVE_IRON_DEFENSE, MOVE_REVERSAL}
     }
 };
 

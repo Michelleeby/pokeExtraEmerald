@@ -48,6 +48,7 @@
 #include "pokemon_jump.h"
 #include "pokemon_storage_system.h"
 #include "pokemon_summary_screen.h"
+#include "random.h"
 #include "region_map.h"
 #include "reshow_battle_screen.h"
 #include "scanline_effect.h"
@@ -72,6 +73,7 @@
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
+#include "constants/pokemon.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
@@ -6483,10 +6485,14 @@ void IsLastMonThatKnowsSurf(void)
 
 static const u8 sText_AskMint[] = _("Would you like to change {STR_VAR_1}'s\nnature to {STR_VAR_2}?");
 static const u8 sText_MintDone[] = _("{STR_VAR_1}'s nature became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
+
 static void Task_Mints(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    
+    struct Pokemon *mon = &gPlayerParty[tMonId];
+    u32 currP = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
+    u32 newP = (NUM_NATURES * (currP % 16777216)) + tNewNature;
+
     switch (tState)
     {
     case 0:
@@ -6549,7 +6555,7 @@ static void Task_Mints(u8 taskId)
             tState++;
         break;
     case 5:
-        SetMonData(&gPlayerParty[tMonId], MON_DATA_HIDDEN_NATURE, &tNewNature);
+        SetMonData(mon, MON_DATA_PERSONALITY, &newP);  
         CalculateMonStats(&gPlayerParty[tMonId]);
         
         RemoveBagItem(gSpecialVar_ItemId, 1);
@@ -6565,7 +6571,7 @@ void ItemUseCB_Mints(u8 taskId, TaskFunc task)
     tState = 0;
     tMonId = gPartyMenu.slotId;
     tSpecies = GetMonData(&gPlayerParty[tMonId], MON_DATA_SPECIES, NULL);
-    tCurrNature = GetNature(&gPlayerParty[tMonId], TRUE);
+    tCurrNature = GetNature(&gPlayerParty[tMonId]);
     tNewNature = ItemId_GetSecondaryId(gSpecialVar_ItemId);
     SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
     gTasks[taskId].func = Task_Mints;

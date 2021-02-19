@@ -96,7 +96,7 @@ void BufferMoveDeleterNicknameAndMove(void);
 void GetNumMovesSelectedMonHas(void);
 void MoveDeleterChooseMoveToForget(void);
 void ItemUseCB_Mints(u8 taskId, TaskFunc task);
-
 bool8 CanLearnTutorMove(u16, u8);
+u32 ReRoll_Personality(int nature, struct Pokemon *mon, u16 species);
 
 #endif // GUARD_PARTY_MENU_H

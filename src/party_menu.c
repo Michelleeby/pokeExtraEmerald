@@ -6486,12 +6486,37 @@ void IsLastMonThatKnowsSurf(void)
 static const u8 sText_AskMint[] = _("Would you like to change {STR_VAR_1}'s\nnature to {STR_VAR_2}?");
 static const u8 sText_MintDone[] = _("{STR_VAR_1}'s nature became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
 
+u32 ReRoll_Personality(int nature, struct Pokemon *mon, u16 species)
+{
+   u32 otId = GetMonData(mon, MON_DATA_OT_ID);
+   bool8 shininess = IsMonShiny(mon);
+   u8 gender = GetMonGender(mon);
+   u32 shinyValue;
+   u32 p;
+
+   if (shininess) {
+   do
+   {
+       p = Random32();
+       shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(p) ^ LOHALF(p);
+   } while ( (nature != GetNatureFromPersonality(p)) || (gender != GetGenderFromSpeciesAndPersonality(species, p)) || (shinyValue >= SHINY_ODDS)  );
+   } else {
+       do
+       {
+           p = Random32();
+       } while ((nature != GetNatureFromPersonality(p)) || (gender != GetGenderFromSpeciesAndPersonality(species, p)));
+
+   }
+
+    return p;
+}
+
 static void Task_Mints(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
+
     struct Pokemon *mon = &gPlayerParty[tMonId];
-    u32 currP = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-    u32 newP = (NUM_NATURES * (currP % 16777216)) + tNewNature;
+    u32 newP = ReRoll_Personality(tNewNature, mon, tSpecies);
 
     switch (tState)
     {

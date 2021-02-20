@@ -6363,7 +6363,7 @@ void DoBattlePyramidMonsHaveHeldItem(void)
             break;
         }
     }
-}
+} 
 
 // Can be called if the Battle Pyramid Bag is full on exiting and at least one party mon still has held items
 // The player can then select to toss items from the bag or take/toss held items from the party
@@ -6486,6 +6486,18 @@ void IsLastMonThatKnowsSurf(void)
 static const u8 sText_AskMint[] = _("Would you like to change {STR_VAR_1}'s\nnature to {STR_VAR_2}?");
 static const u8 sText_MintDone[] = _("{STR_VAR_1}'s nature became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
 
+void MaxMonIvs(struct Pokemon *mon) 
+{
+    int max = 31;
+
+    SetMonData(mon, MON_DATA_HP_IV, &max);
+    SetMonData(mon, MON_DATA_ATK_IV, &max);
+    SetMonData(mon, MON_DATA_DEF_IV, &max);
+    SetMonData(mon, MON_DATA_SPATK_IV, &max);
+    SetMonData(mon, MON_DATA_SPDEF_IV, &max);
+    SetMonData(mon, MON_DATA_SPEED_IV, &max);
+}
+
 u32 ReRoll_Personality(int nature, struct Pokemon *mon, u16 species)
 {
    u32 otId = GetMonData(mon, MON_DATA_OT_ID);
@@ -6495,17 +6507,19 @@ u32 ReRoll_Personality(int nature, struct Pokemon *mon, u16 species)
    u32 p;
 
    if (shininess) {
-   do
-   {
-       p = Random32();
-       shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(p) ^ LOHALF(p);
-   } while ( (nature != GetNatureFromPersonality(p)) || (gender != GetGenderFromSpeciesAndPersonality(species, p)) || (shinyValue >= SHINY_ODDS)  );
+        do
+        {
+            p = Random32();
+            shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(p) ^ LOHALF(p);
+        } while ( (nature != GetNatureFromPersonality(p)) 
+               || (gender != GetGenderFromSpeciesAndPersonality(species, p)) 
+               || (shinyValue >= SHINY_ODDS)  );
    } else {
-       do
-       {
-           p = Random32();
-       } while ((nature != GetNatureFromPersonality(p)) || (gender != GetGenderFromSpeciesAndPersonality(species, p)));
-
+        do
+        {
+            p = Random32();
+        } while ( (nature != GetNatureFromPersonality(p)) 
+               || (gender != GetGenderFromSpeciesAndPersonality(species, p)));
    }
 
     return p;
@@ -6579,8 +6593,9 @@ static void Task_Mints(u8 taskId)
             tState++;
         break;
     case 5:
-        SetMonData(mon, MON_DATA_PERSONALITY, &newP);  
-        CalculateMonStats(&gPlayerParty[tMonId]);
+        SetMonData(mon, MON_DATA_PERSONALITY, &newP);
+        MaxMonIvs(mon);
+        CalculateMonStats(mon);
         
         RemoveBagItem(gSpecialVar_ItemId, 1);
         gTasks[taskId].func = Task_ClosePartyMenu;
